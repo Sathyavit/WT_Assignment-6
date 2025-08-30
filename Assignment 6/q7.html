@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Date Format Validation</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .error { color: red; font-size: 14px; }
+    .success { color: green; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h2>Date Format Validation (DD/MM/YYYY)</h2>
+  <form id="dateForm">
+    Date: <input type="text" id="date" placeholder="DD/MM/YYYY">
+    <span id="msg"></span><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("dateForm");
+    const date = document.getElementById("date");
+    const msg = document.getElementById("msg");
+
+    form.addEventListener("submit", (e) => {
+      const regex = /^\d{2}\/\d{2}\/\d{4}$/;
+      if (!regex.test(date.value)) {
+        e.preventDefault();
+        msg.textContent = "❌ Invalid date format";
+        msg.className = "error";
+      } else {
+        msg.textContent = "✅ Valid format";
+        msg.className = "success";
+      }
+    });
+  </script>
+</body>
+</html>
