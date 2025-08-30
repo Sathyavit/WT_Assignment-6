@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic Hobby Fields</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .error { color: red; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h2>Dynamic Hobby Fields</h2>
+  <form>
+    <div id="hobbies">
+      <input type="text" name="hobby" placeholder="Enter hobby">
+    </div>
+    <button type="button" onclick="addHobby()">Add Hobby</button>
+  </form>
+
+  <script>
+    function addHobby() {
+      const div = document.getElementById("hobbies");
+      const input = document.createElement("input");
+      input.type = "text";
+      input.name = "hobby";
+      input.placeholder = "Enter hobby";
+      input.addEventListener("blur", () => {
+        const regex = /^[A-Za-z\s]+$/;
+        if (!regex.test(input.value)) {
+          input.style.border = "2px solid red";
+        } else {
+          input.style.border = "2px solid green";
+        }
+      });
+      div.appendChild(document.createElement("br"));
+      div.appendChild(input);
+    }
+  </script>
+</body>
+</html>
