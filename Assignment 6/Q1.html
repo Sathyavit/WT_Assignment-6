@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .error { color: red; font-size: 14px; }
+    .success { color: green; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h2>Dynamic Registration Form</h2>
+  <form id="regForm">
+    Name: <input type="text" id="name"><span id="nameErr" class="error"></span><br><br>
+    Email: <input type="text" id="email"><span id="emailErr" class="error"></span><br><br>
+    Password: <input type="password" id="password"><span id="passErr" class="error"></span><br><br>
+    <button type="submit" id="submitBtn" disabled>Submit</button>
+  </form>
+
+  <script>
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const btn = document.getElementById("submitBtn");
+
+    function validate() {
+      let valid = true;
+
+      
+      if (name.value.trim() === "") {
+        document.getElementById("nameErr").innerText = " Required";
+        valid = false;
+      } else document.getElementById("nameErr").innerText = "";
+
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.value)) {
+        document.getElementById("emailErr").innerText = " Invalid email";
+        valid = false;
+      } else document.getElementById("emailErr").innerText = "";
+
+     
+      const passRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+      if (!passRegex.test(password.value)) {
+        document.getElementById("passErr").innerText = " Weak password";
+        valid = false;
+      } else document.getElementById("passErr").innerText = "";
+
+      btn.disabled = !valid;
+    }
+
+    name.addEventListener("blur", validate);
+    email.addEventListener("blur", validate);
+    password.addEventListener("blur", validate);
+
+    document.getElementById("regForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Form submitted successfully!");
+    });
+  </script>
+</body>
+</html>
 
