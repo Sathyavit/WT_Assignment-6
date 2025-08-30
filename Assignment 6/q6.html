@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Username Validation</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .error { color: red; font-size: 14px; }
+    .success { color: green; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h2>Username Validation</h2>
+  <form id="userForm">
+    Username: <input type="text" id="username">
+    <span id="msg"></span><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("userForm");
+    const username = document.getElementById("username");
+    const msg = document.getElementById("msg");
+
+    form.addEventListener("submit", (e) => {
+      const regex = /^[a-zA-Z0-9_]{3,16}$/;
+      if (!regex.test(username.value)) {
+        e.preventDefault();
+        msg.textContent = "❌ Invalid username (3–16 letters, numbers, underscore only)";
+        msg.className = "error";
+      } else {
+        msg.textContent = "✅ Valid username";
+        msg.className = "success";
+      }
+    });
+  </script>
+</body>
+</html>
