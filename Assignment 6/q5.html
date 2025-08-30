@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Match</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .error { color: red; font-size: 14px; }
+    .success { color: green; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h2>Password Matching</h2>
+  <form>
+    Password: <input type="password" id="pass"><br><br>
+    Confirm Password: <input type="password" id="cpass">
+    <span id="msg"></span>
+  </form>
+
+  <script>
+    const pass = document.getElementById("pass");
+    const cpass = document.getElementById("cpass");
+    const msg = document.getElementById("msg");
+
+    function checkMatch() {
+      if (pass.value === "" || cpass.value === "") {
+        msg.textContent = "";
+        return;
+      }
+      if (pass.value === cpass.value) {
+        msg.textContent = "✅ Passwords match";
+        msg.className = "success";
+      } else {
+        msg.textContent = "❌ Passwords do not match";
+        msg.className = "error";
+      }
+    }
+
+    pass.addEventListener("input", checkMatch);
+    cpass.addEventListener("input", checkMatch);
+  </script>
+</body>
+</html>
