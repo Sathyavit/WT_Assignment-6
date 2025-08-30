@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hex Color Validation</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .error { color: red; font-size: 14px; }
+    .success { color: green; font-size: 14px; }
+    #preview { width: 40px; height: 20px; display: inline-block; border: 1px solid #000; margin-left: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Hexadecimal Color Validation with Live Preview</h2>
+  <form>
+    Color: <input type="text" id="color" placeholder="#FFF or #FFFFFF">
+    <span id="msg"></span>
+    <div id="preview"></div>
+  </form>
+
+  <script>
+    const color = document.getElementById("color");
+    const msg = document.getElementById("msg");
+    const preview = document.getElementById("preview");
+
+    color.addEventListener("input", () => {
+      const regex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+      if (regex.test(color.value)) {
+        msg.textContent = "✅ Valid code";
+        msg.className = "success";
+        preview.style.backgroundColor = color.value;
+      } else {
+        msg.textContent = "❌ Invalid code";
+        msg.className = "error";
+        preview.style.backgroundColor = "transparent";
+      }
+    });
+  </script>
+</body>
+</html>
