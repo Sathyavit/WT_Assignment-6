@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic Form Builder</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .error { color: red; font-size: 14px; }
+    .success { color: green; font-size: 14px; }
+    form { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Dynamic Form Builder</h2>
+  <form id="builder">
+    Select Input Type: 
+    <select id="inputType">
+      <option value="text">Text</option>
+      <option value="email">Email</option>
+      <option value="password">Password</option>
+    </select>
+    <button type="button" id="addBtn">Add</button>
+  </form>
+
+  <form id="dynamicForm"></form>
+
+  <script>
+    const addBtn = document.getElementById("addBtn");
+    const inputType = document.getElementById("inputType");
+    const dynamicForm = document.getElementById("dynamicForm");
+
+    addBtn.addEventListener("click", () => {
+      const input = document.createElement("input");
+      input.type = inputType.value;
+      input.placeholder = "Enter " + inputType.value;
+      const span = document.createElement("span");
+
+      input.addEventListener("blur", () => {
+        let regex;
+        if (input.type === "text") regex = /^[A-Za-z\s]+$/;
+        if (input.type === "email") regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+        if (input.type === "password") regex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+        if (regex && regex.test(input.value)) {
+          span.textContent = "✅ Valid";
+          span.className = "success";
+        } else {
+          span.textContent = "❌ Invalid";
+          span.className = "error";
+        }
+      });
+
+      dynamicForm.appendChild(input);
+      dynamicForm.appendChild(span);
+      dynamicForm.appendChild(document.createElement("br"));
+      dynamicForm.appendChild(document.createElement("br"));
+    });
+  </script>
+</body>
+</html>
