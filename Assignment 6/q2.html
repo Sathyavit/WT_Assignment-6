@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Regex Validation</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .error { color: red; font-size: 14px; }
+    .success { color: green; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h2>Email Regex Validation (onBlur)</h2>
+  <form id="emailForm">
+    Email: <input type="text" id="email">
+    <span id="msg"></span>
+  </form>
+
+  <script>
+    const emailField = document.getElementById("email");
+    const msg = document.getElementById("msg");
+
+    emailField.addEventListener("blur", () => {
+      const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+      if (regex.test(emailField.value)) {
+        msg.textContent = "✅ Valid email";
+        msg.className = "success";
+      } else {
+        msg.textContent = "❌ Invalid email format";
+        msg.className = "error";
+      }
+    });
+  </script>
+</body>
+</html>
